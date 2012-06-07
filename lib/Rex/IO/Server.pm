@@ -30,6 +30,9 @@ After installing create the file I</etc/rex/io/server.conf>. And set the url to 
 
  {
     cmdb => "http://rex-cmdb:3000",
+    git  => "git://url/to/your/git/repository.git",
+    checkout_path => "/var/lib/rex.io/services",
+    branch => "master",
  }
 
 And start the server:
@@ -54,7 +57,7 @@ If you get an answer like this it works:
 package Rex::IO::Server;
 use Mojo::Base 'Mojolicious';
 
-our $VERSION = "0.0.1";
+our $VERSION = "0.0.2";
 
 # This method will run once at server start
 sub startup {
@@ -99,6 +102,9 @@ sub startup {
    $r->put("/server/:name/:section")->to("server#section_put");
 
    $r->post("/fusioninventory")->to("fusion_inventory#post");
+
+   $r->route("/repository/update")->via("UPDATE")->to("repository#update");
+   $r->get("/repository/:service")->to("repository#get_service");
 }
 
 1;

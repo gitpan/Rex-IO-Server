@@ -26,4 +26,4 @@ requires:
   XML::Simple: 0
 resources:
   repository: https://github.com/krimdomu/rex-io-server
-version: v0.0.1
+version: v0.0.2
